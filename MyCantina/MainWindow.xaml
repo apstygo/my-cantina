@@ -1,12 +1,16 @@
-﻿<Window x:Class="MyCantina.MainWindow"
+﻿<Window x:Name="SignInWindow" x:Class="MyCantina.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyCantina"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Вход" Height="313.469" Width="300" ResizeMode="NoResize" >
     <Grid>
-        
+        <Button x:Name="buttonSignIn" Content="Войти" HorizontalAlignment="Center" Margin="50,200,50,0" VerticalAlignment="Top" Width="100" Cursor="Hand" Click="buttonSignIn_Click"/>
+        <Label Content="Логин" Margin="50,44,50,0" HorizontalAlignment="Stretch" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
+        <TextBox x:Name="textBoxLogin" HorizontalAlignment="Center" Height="23" Margin="50,75,50,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" HorizontalContentAlignment="Center"/>
+        <Label Content="Пароль" HorizontalAlignment="Center" Margin="50,111,50,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" RenderTransformOrigin="0.484,0.491" Width="195"/>
+        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Center" Margin="50,142,50,0" VerticalAlignment="Top" Width="120" Height="23" HorizontalContentAlignment="Center"/>
     </Grid>
 </Window>
