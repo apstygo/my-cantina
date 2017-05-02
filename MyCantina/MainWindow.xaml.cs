@@ -21,9 +21,7 @@ namespace MyCantina
     /// </summary>
     public partial class MainWindow : Window
     {
-        //const string login = "login";
-        //const string password = "password";
-        const string filename = "logins.txt";
+        const string filename = "LoginsTemp.txt";
         private List<string> logins = new List<string>();
         private List<string> passwords = new List<string>();
         public MainWindow()
@@ -76,6 +74,8 @@ namespace MyCantina
             }
             this.Close();
             window.Show();
+
+            
         }
 
         private void getLogins()
@@ -107,6 +107,11 @@ namespace MyCantina
             {
                 return null;
             }
+        }
+
+        private void buttonSignUp_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
