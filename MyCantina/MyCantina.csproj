@@ -62,9 +62,49 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddDishWindow.xaml.cs">
+      <DependentUpon>AddDishWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CantinaChoicePage.xaml.cs">
+      <DependentUpon>CantinaChoicePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Hash.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="MyCantinaDbContext.cs" />
     <Compile Include="OrderLine.cs" />
+    <Compile Include="OrderPage.xaml.cs">
+      <DependentUpon>OrderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages.cs" />
+    <Compile Include="SignUpWindow.xaml.cs">
+      <DependentUpon>SignUpWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestWindow.xaml.cs">
+      <DependentUpon>TestWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
+    <Compile Include="ViewOrderLinesPage.xaml.cs">
+      <DependentUpon>ViewOrderLinesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewOrdersPage.xaml.cs">
+      <DependentUpon>ViewOrdersPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AddDishWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CantinaChoicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainMenuWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -85,6 +125,26 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OrderPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SignUpWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewOrderLinesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewOrdersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Order.cs" />
@@ -112,13 +172,54 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DishImages\" />
+    <None Include="Resources\1493843660_internt_web_technology-13.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="LoginsTemp.txt" />
+    <None Include="Resources\1493999575_internt_web_technology-15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1493999588_internt_web_technology-02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1493999606_internt_web_technology-10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\10.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\35_big.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\559eb0fd476f1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\00117171.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\20140701Koffe-Toyama-10.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\20150615.1434628788.SNCPSG10.obj.0.1.jpg.oe.jpg.pf.jpg.1350nowm.jpg.1350x.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1494074313_back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\content_fotolia_81022697_subscription_xxl.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\f95865ad2036eb92de717d2c3051e378.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Kruassany-s-shokoladom.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mrd857w3mbgeejhe961xg.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,33 @@
+﻿<Page x:Class="MyCantina.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MyCantina"
+      mc:Ignorable="d" 
+      d:DesignHeight="290" d:DesignWidth="410"
+      Title="MainPage">
+
+    <Grid>
+        <Button x:Name="buttonOrder" HorizontalAlignment="Left" Margin="30,45,0,0" VerticalAlignment="Top" Width="160" Height="200" Click="buttonOrder_Click">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Image Name="imageOrder" Width="100" Height="100" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="1" HorizontalAlignment="Center" FontFamily="Segoe UI Semibold" FontSize="16">Сделать заказ</TextBlock>
+            </Grid>
+        </Button>
+        <Button x:Name="buttonView" HorizontalAlignment="Right" Margin="0,45,30,0" VerticalAlignment="Top" Width="160" Height="200" Click="buttonView_Click">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Image Name ="imageView" Width="100" Height="100" VerticalAlignment="Center" />
+                <TextBlock Grid.Row="1" HorizontalAlignment="Center" FontFamily="Segoe UI Semibold" FontSize="16">Просмотреть заказы</TextBlock>
+            </Grid>
+        </Button>
+    </Grid>
+</Page>

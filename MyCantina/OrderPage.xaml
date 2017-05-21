@@ -1,0 +1,35 @@
+﻿<Page x:Class="MyCantina.OrderPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MyCantina"
+      mc:Ignorable="d" 
+      d:DesignHeight="290" d:DesignWidth="410"
+      Title="OrderPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="250" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <ListView x:Name="listViewOrder" HorizontalContentAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="textBlockName" Grid.Column="0" Text="{Binding Name}" HorizontalAlignment="Left" FontSize="18"/>
+                        <TextBlock x:Name="textBlockPrice" Text="{Binding Cost}" Grid.Column="1" HorizontalAlignment="Right"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button x:Name="buttonCancel" Grid.Row="1" Width="102.5" HorizontalAlignment="Left" Click="buttonCancel_Click" Content="Отмена" />
+        <Button x:Name="buttonAdd" Grid.Row="1" Width="102.5" HorizontalAlignment="right" Margin="0,0,102.5,0" Click="buttonAdd_Click" Content="Добавить" />
+        <Button Name ="buttonDelete" Grid.Row ="1" Width ="102.5" Margin ="102.5,0,0,0" HorizontalAlignment="Left" Content="Удалить" Click="buttonDelete_Click"></Button>
+        <Button x:Name="buttonAccept" Grid.Row="1" Width="102.5" HorizontalAlignment="Right" Click="buttonAccept_Click" Content="Принять" />
+    </Grid>
+</Page>

@@ -1,0 +1,23 @@
+﻿<Page x:Class="MyCantina.CantinaChoicePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MyCantina"
+      mc:Ignorable="d" 
+      d:DesignHeight="290" d:DesignWidth="410"
+      Title="CantinaChoicePage">
+
+    <Grid>
+        <Button x:Name="buttonKirpich" Margin ="12.5,12.5,0,12.5" Width ="120" Height="150" HorizontalAlignment="Left" Click="buttonKirpich_Click">
+            <TextBlock>На Кирпичной</TextBlock>
+        </Button>
+        <Button x:Name="buttonShabolovka" Margin ="0,12.5,0,12.5"  Width ="120" Height="150" HorizontalAlignment="Center" Click="buttonShabolovka_Click">
+            <TextBlock>На Шаболовке</TextBlock>
+        </Button>
+        <Button x:Name="buttonMyaso" Margin ="0,12.5,12.5,12.5"  Width ="120" Height="150" HorizontalAlignment="Right" Click="buttonMyaso_Click">
+            <TextBlock>На Мясницкой</TextBlock>
+        </Button>
+        <Button x:Name="buttonBack" Width="60" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12.5,12.5,0,0" Click="buttonBack_Click"/>
+    </Grid>
+</Page>

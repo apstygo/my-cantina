@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.IO;
+using System.Windows.Documents;
+using Res = MyCantina.Properties.Resources;
 
 namespace MyCantina
 {
@@ -21,31 +14,82 @@ namespace MyCantina
     /// </summary>
     public partial class MainWindow : Window
     {
-        const string filename = "LoginsTemp.txt";
+        private string dirTemp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\MyCantinaTemp\";
         private List<string> logins = new List<string>();
         private List<string> passwords = new List<string>();
         public MainWindow()
         {
             InitializeComponent();
-            getLogins();
+
+            Directory.CreateDirectory(dirTemp + "ProfilePictures");
+            Directory.CreateDirectory(dirTemp + "ResourceFiles");
+            Res.genericAvatar.Save(dirTemp + @"ResourceFiles\" + "genericAvatar.jpg");
+            Res.iconOrder.Save(dirTemp + @"ResourceFiles\" + "iconOrder.jpg");
+            Res.iconSettings.Save(dirTemp + @"ResourceFiles\" + "iconSettings.jpg");
+            Res.iconView.Save(dirTemp + @"ResourceFiles\" + "iconView.jpg");
+
+            //Res.borsch.Save(dirTemp + @"ResourceFiles\" + "borsch.jpg");
+            //Res.bread.Save(dirTemp + @"ResourceFiles\" + "bread.jpg");
+            //Res.coffee.Save(dirTemp + @"ResourceFiles\" + "coffee.jpg");
+            //Res.croissants.Save(dirTemp + @"ResourceFiles\" + "croissants.jpg");
+            //Res.kotlety.Save(dirTemp + @"ResourceFiles\" + "kotlety.jpg");
+            //Res.pasta.Save(dirTemp + @"ResourceFiles\" + "pasta.jpg");
+            //Res.plov.Save(dirTemp + @"ResourceFiles\" + "plov.jpg");
+            //Res.salad.Save(dirTemp + @"ResourceFiles\" + "salad.jpg");
+            //Res.scons.Save(dirTemp + @"ResourceFiles\" + "scons.jpg");
+            //Res.tea.Save(dirTemp + @"ResourceFiles\" + "tea.jpg");
+            
+            GetLogins();
+
+            textBoxLogin.Focus();
+
+            using (var ctx = new MyCantinaDbContext())
+            {
+                //List<Cantina> cantinas = new List<Cantina>();
+                //cantinas.Add(new Cantina("На Кирпичной", "ул. Кирпичная, д. 33"));
+                //cantinas.Add(new Cantina("На Шаболовке", "ул. Шаболовка, д. 26"));
+                //cantinas.Add(new Cantina("На Мясницкой", "ул. Мясницкая, д. 20"));
+                //foreach (Cantina cantina in cantinas)
+                //{
+                //    ctx.Cantinas.Add(cantina);
+                //}
+
+                //ctx.SaveChanges();
+
+
+                //ctx.Dishes.Add(new Dish("Чай", 20, ctx.Cantinas.Find(1)));
+                //ctx.Dishes.Add(new Dish("Кофе", 120, ctx.Cantinas.Find(1)));
+                //ctx.Dishes.Add(new Dish("Хлеб", 10, ctx.Cantinas.Find(1)));
+                //ctx.Dishes.Add(new Dish("Борщ", 70, ctx.Cantinas.Find(2)));
+                //ctx.Dishes.Add(new Dish("Плов", 150, ctx.Cantinas.Find(2)));
+                //ctx.Dishes.Add(new Dish("Круассан", 40, ctx.Cantinas.Find(2)));
+                //ctx.Dishes.Add(new Dish(@"Салат 'Весне я рад'", 50, ctx.Cantinas.Find(2)));
+                //ctx.Dishes.Add(new Dish("Пампушки", 30, ctx.Cantinas.Find(3)));
+                //ctx.Dishes.Add(new Dish("Котлеты с пюрешкой", 100, ctx.Cantinas.Find(3)));
+                //ctx.Dishes.Add(new Dish("Макароны по-флотски", 90, ctx.Cantinas.Find(3)));
+
+                //ctx.SaveChanges();
+            }
+
+            //var test = new TestWindow();
+            //test.ShowDialog();
         }
 
-        private void buttonSignIn_Click(object sender, RoutedEventArgs e)
+        private void SignIn()
         {
-            string login, password;
+            string login, passwordHash;
             try
             {
-                login = getLogPas(textBoxLogin.Text)[0];
+                login = GetLogPas(textBoxLogin.Text)[0];
             }
             catch
             {
                 login = null;
             }
             if (login != null)
-                password = getLogPas(textBoxLogin.Text)[1];
+                passwordHash = GetLogPas(textBoxLogin.Text)[1];
             else
-                password = null;
-            var window = new MainMenuWindow();
+                passwordHash = null;
 
 
             if (string.IsNullOrWhiteSpace(textBoxLogin.Text))
@@ -66,33 +110,48 @@ namespace MyCantina
                 textBoxLogin.Focus();
                 return;
             }
-            if (passwordBox.Password != password)
+            if (!Hash.Same(passwordBox.Password, passwordHash))
             {
                 MessageBox.Show("Неверный пароль, попробуйте снова.");
                 passwordBox.Focus();
                 return;
             }
-            this.Close();
-            window.Show();
 
-            
+
+            using (var ctx = new MyCantinaDbContext())
+            {
+                User user = ctx.Users
+                    .FirstOrDefault(u => u.Login == login);
+
+                var window = new MainMenuWindow(user);
+                this.Close();
+                window.Show();
+            }
         }
 
-        private void getLogins()
+        private void buttonSignIn_Click(object sender, RoutedEventArgs e)
         {
-            using (var sr = new StreamReader(filename))
+            SignIn();
+        }
+
+        //  Получает логины-пароли из файла
+
+        private void GetLogins()
+        {
+            using (var ctx = new MyCantinaDbContext())
             {
-                while (!sr.EndOfStream)
+                List<User> users = ctx.Users.ToList();
+                foreach (User n in users)
                 {
-                    var line = sr.ReadLine();
-                    var split = line.Split('-');
-                    logins.Add(split[0]);
-                    passwords.Add(split[1]);
+                    logins.Add(n.Login);
+                    passwords.Add(n.PasswordHash);
                 }
             }
         }
 
-        private string[] getLogPas(string loginAttempt)
+        //  Ищет (по логину) пару логин-пароль из ЛИСТОВ
+
+        private string[] GetLogPas(string loginAttempt)
         {
             try
             {
@@ -108,10 +167,20 @@ namespace MyCantina
                 return null;
             }
         }
+        
 
         private void buttonSignUp_Click(object sender, RoutedEventArgs e)
         {
+            var window = new SignUpWindow(logins);
+            window.ShowDialog();
+        }
 
+        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SignIn();
+            }
         }
     }
 }

@@ -1,0 +1,38 @@
+﻿<Page x:Class="MyCantina.ViewOrderLinesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MyCantina"
+      mc:Ignorable="d" 
+      d:DesignHeight="290" d:DesignWidth="410"
+      Title="ViewOrderLinesPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="250"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ListView Name ="listViewOrderLines">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="textBlockName" Grid.Column="0" Text="{Binding Name}" HorizontalAlignment="Left" FontSize="18"/>
+                        <TextBlock x:Name="textBlockPrice" Text="{Binding Cost}" Grid.Column="1" HorizontalAlignment="Right"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Name ="buttonReturn" Grid.Row="1" Width ="102.5" HorizontalAlignment="Left" Margin ="51,0,0,0" Content="Вернуться" Click="buttonReturn_Click"/>
+        <Button Name ="buttonPay" Grid.Row="1" Width ="102.5" HorizontalAlignment="Right" Margin ="0,0,51,0" Content="Оплатить" Click="buttonPay_Click"/>
+    </Grid>
+</Page>

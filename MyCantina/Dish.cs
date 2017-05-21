@@ -1,20 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mime;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Windows.Markup;
 
 namespace MyCantina
 {
-    class Dish
+    public class Dish
     {
-        public int DishID { get; set; }
-        public string ImagePath { get; set; }
-        public string Description { get; set; }
-        public double Cost { get; set; }
+        public Dish(string name, double cost, Cantina cantina)
+        {
+            Name = name;
+            Cost = cost;
+            Cantina = cantina;
+        }
 
-        public List<Order> Orders { get; set; }
-        public List<Cantina> Cantinas { get; set; }
+        public Dish()
+        {
+            
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        public int DishID { get; set; }
+        public string Name { get; set; }
+        public double Cost { get; set; }
+        
+        public Cantina Cantina { get; set; }
     }
 }
