@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -12,21 +11,21 @@ namespace MyCantina
     /// </summary>
     public partial class SignUpWindow : Window
     {
-        private string dirTemp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\MyCantinaTemp\ProfilePictures\";
+        private string _dirTemp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\MyCantinaTemp\";
         
-        private List<string> loginsList;
+        private List<string> _loginsList;
 
         public SignUpWindow(List<string> loginsList)
         {
-            this.loginsList = loginsList;
+            this._loginsList = loginsList;
 
             InitializeComponent();
-            imageAvatar.Source = new BitmapImage(new Uri(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\MyCantinaTemp\ResourceFiles\genericAvatar.jpg"));
+            imageAvatar.Source = new BitmapImage(new Uri(_dirTemp + @"ResourceFiles\genericAvatar.jpg"));
         }
 
         private void buttonAccept_Click(object sender, RoutedEventArgs e)
         {
-            if (LoginExists(loginsList, textBoxLogin.Text))
+            if (LoginExists(_loginsList, textBoxLogin.Text))
             {
                 MessageBox.Show("Пользователь с таким логином уже существует.");
                 return;
@@ -47,39 +46,30 @@ namespace MyCantina
                 MessageBox.Show("Введенные пароли не совпадают, повторите ввод.");
                 return;
             }
-
-            // Создаем хэш
-
+            
             string savedPasswordHash = Hash.GetHash(passwordBoxTwo.Password);
-
-            //  Записываем данные нового пользователя в файл
-
-            //using (var sw = new StreamWriter(File.Open("LoginsTemp.txt", FileMode.Append)))
-            //{
-            //    string line = textBoxLogin.Text + '-' + savedPasswordHash + '-' + textBoxName.Text;
-            //    sw.WriteLine(line);
-            //}
-
+            
             using (var ctx = new MyCantinaDbContext())
             {
                 User usr = new User(textBoxName.Text, textBoxLogin.Text, savedPasswordHash);
 
                 ctx.Users.Add(usr);
                 ctx.SaveChanges();
+                Logger.Log("Создан пользователь '" + usr.Login + "'");
             }
-
-            //  Копируем аватар из указанной директории во временную и переименовываем его
-
-            if (!Directory.Exists(dirTemp))
-                Directory.CreateDirectory(dirTemp);
+            
+            if (!Directory.Exists(_dirTemp + @"ProfilePictures\"))
+                Directory.CreateDirectory(_dirTemp + @"ProfilePictures\");
 
             try
             {
-                File.Copy(textBoxAvatarPath.Text, dirTemp + textBoxLogin.Text + ".jpg");
+                File.Copy(textBoxAvatarPath.Text, _dirTemp + @"ProfilePictures\" + textBoxLogin.Text + ".jpg");
+                Logger.Log("Добавлен аватар");
             }
             catch
             {
-                MessageBox.Show("Вы сможете добавить аватар позже в настройках профиля.");
+                MessageBox.Show(
+                    @"Вы сможете позже вручную поменять аватар, заменив файл C:\Users\User\Documents\MyCantinaTemp\ProfilePictures\(ваш логин).jpg", "Замена аватара", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
             MessageBox.Show("Регистрация выполнена успешно.");

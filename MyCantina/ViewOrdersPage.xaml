@@ -13,7 +13,7 @@
             <RowDefinition Height="250"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ListView Name ="listViewOrders" HorizontalAlignment="Stretch">
+        <ListView Name ="listViewOrders" HorizontalAlignment="Stretch" MouseDoubleClick="listViewOrders_MouseDoubleClick">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -39,7 +39,9 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Name ="buttonReturn" Grid.Row="1" Width ="102.5" HorizontalAlignment="Left" Margin ="51,0,0,0" Content="Вернуться" Click="buttonReturn_Click"/>
-        <Button Name ="buttonView" Grid.Row="1" Width ="102.5" HorizontalAlignment="Right" Margin ="0,0,51,0" Content="Просмотреть" Click="buttonView_Click"/>
+        <Button Name ="buttonReturn" Grid.Row="1" Width ="102.5" HorizontalAlignment="Left" Margin ="35,0,0,0" Content="Вернуться" Click="buttonReturn_Click"/>
+        <Button Name ="buttonView" Grid.Row="1" Width ="102.5" HorizontalAlignment="Right" Margin ="0,0,35,0" Content="Просмотреть" Click="buttonView_Click"/>
+        <Button Name ="buttonClearHistory" Grid.Row="1" Width ="102.5" HorizontalAlignment="Center" Margin ="0,0,0,0" Content="Очистить историю" Click="buttonClearHistory_Click"/>
+
     </Grid>
 </Page>

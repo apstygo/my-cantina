@@ -1,15 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Windows.Markup;
-
-namespace MyCantina
+﻿namespace MyCantina
 {
     public class Dish
     {
-        public Dish(string name, double cost, Cantina cantina)
+        public Dish(string name, double cost, int cantinaID)
         {
             Name = name;
             Cost = cost;
-            Cantina = cantina;
+            CantinaID = cantinaID;
         }
 
         public Dish()
@@ -22,6 +19,7 @@ namespace MyCantina
             return Name;
         }
 
+        public int CantinaID { get; set; }
         public int DishID { get; set; }
         public string Name { get; set; }
         public double Cost { get; set; }

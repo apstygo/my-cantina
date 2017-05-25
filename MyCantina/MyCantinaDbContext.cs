@@ -4,9 +4,9 @@ namespace MyCantina
 {
     class MyCantinaDbContext : DbContext
     {
-        public MyCantinaDbContext() : base()
+        static MyCantinaDbContext()
         {
-            
+            Database.SetInitializer(new MyCantinaDbInitializer());
         }
 
         public DbSet<User> Users { get; set; }

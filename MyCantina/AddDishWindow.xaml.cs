@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace MyCantina
 {
@@ -19,15 +9,13 @@ namespace MyCantina
     /// </summary>
     public partial class AddDishWindow : Window
     {
-        private OrderPage OrderPage;
+        private OrderPage _orderPage;
         
         public AddDishWindow(OrderPage orderPage)
         {
             InitializeComponent();
-            OrderPage = orderPage;
-            comboBoxDishes.ItemsSource = OrderPage.AvailableDishes;
-            //comboBoxDishes.SelectedIndex = 0;
-            //comboBoxDishes.Text = "Выберите блюдо";
+            _orderPage = orderPage;
+            comboBoxDishes.ItemsSource = _orderPage.AvailableDishes;
         }
         
         private void comboBoxDishes_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -45,10 +33,10 @@ namespace MyCantina
                     var dish = ctx.Dishes
                         .FirstOrDefault(b => b.Name == selectedItem);
 
-                    OrderPage.ChosenDishes.Add(dish);
+                    _orderPage.ChosenDishes.Add(dish);
                 }
 
-                OrderPage.Refresh();
+                _orderPage.Refresh();
 
                 this.Close();
             }

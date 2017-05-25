@@ -18,6 +18,6 @@
         <Button x:Name="buttonMyaso" Margin ="0,12.5,12.5,12.5"  Width ="120" Height="150" HorizontalAlignment="Right" Click="buttonMyaso_Click">
             <TextBlock>На Мясницкой</TextBlock>
         </Button>
-        <Button x:Name="buttonBack" Width="60" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12.5,12.5,0,0" Click="buttonBack_Click"/>
+        <Button x:Name="buttonBack" Width="60" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12,250,0,0" Click="buttonBack_Click" Content="Вернуться"/>
     </Grid>
 </Page>

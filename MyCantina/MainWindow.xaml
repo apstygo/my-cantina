@@ -12,7 +12,7 @@
         <TextBox x:Name="textBoxLogin" HorizontalAlignment="Center" Height="23" Margin="50,75,50,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" HorizontalContentAlignment="Center"/>
         <Label Content="Пароль" HorizontalAlignment="Center" Margin="50,111,50,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" RenderTransformOrigin="0.484,0.491" Width="195"/>
         <PasswordBox x:Name="passwordBox" HorizontalAlignment="Center" Margin="50,142,50,0" VerticalAlignment="Top" Width="120" Height="23" HorizontalContentAlignment="Center"/>
-        <Button x:Name="buttonSignUp" Content="Регистрация" HorizontalAlignment="Center" Margin="97,235,97,0" VerticalAlignment="Top" Width="100" Click="buttonSignUp_Click"/>
+        <Button x:Name="buttonSignUp" Content="Регистрация" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20" Width="100" Click="buttonSignUp_Click"/>
 
     </Grid>
 </Window>

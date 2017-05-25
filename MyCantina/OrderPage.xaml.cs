@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,14 +10,14 @@ namespace MyCantina
     /// </summary>
     public partial class OrderPage : Page
     {
-        public List<Dish> ChosenDishes = new List<Dish>();  //  Не уверен, стоит ли так делать...
+        public List<Dish> ChosenDishes = new List<Dish>();
         public List<Dish> AvailableDishes;
-        private Cantina Cantina;
+        private Cantina _cantina;
 
         public OrderPage(Cantina cantina)
         {
             InitializeComponent();
-            Cantina = cantina;
+            _cantina = cantina;
             using (var ctx = new MyCantinaDbContext())
             {
                 var dishes = from b in ctx.Dishes
@@ -54,19 +53,20 @@ namespace MyCantina
                 {
                     using (var ctx = new MyCantinaDbContext())
                     {
-                        var cantina = ctx.Cantinas.First(c => c.Name == Cantina.Name);
+                        var cantina = ctx.Cantinas.First(c => c.Name == _cantina.Name);
                         var user = ctx.Users.First(u => u.Login == MainMenuWindow.User.Login);
 
                         var order = new Order(user, cantina, price);
                         ctx.Orders.Add(order);
-                        int id = ctx.Orders.ToList().Count + 1;
+                        int id = order.OrderID;
                         foreach (Dish dish in ChosenDishes)
                         {
                             var dBDish = ctx.Dishes.Single(d => d.DishID == dish.DishID);
                             ctx.OrderLines.Add(new OrderLine(id, dBDish));
                         }
                         ctx.SaveChanges();
-                        MessageBox.Show("Заказ номер " + id + " успешно создан.");
+                        MessageBox.Show("Заказ номер '" + order.OrderID + "' успешно создан.");
+                        Logger.Log("Создан заказ номер '"+ order.OrderID + "'");
                     }
 
                     NavigationService.GoBack();

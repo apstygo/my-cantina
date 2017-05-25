@@ -10,13 +10,13 @@ namespace MyCantina
     /// </summary>
     public partial class MainPage : Page
     {
-        private string dirTemp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\MyCantinaTemp\";
+        private string _dirTemp = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\MyCantinaTemp\";
         public MainPage()
         {
             InitializeComponent();
             
-            imageOrder.Source = new BitmapImage(new Uri(dirTemp + @"ResourceFiles\iconOrder.jpg"));
-            imageView.Source = new BitmapImage(new Uri(dirTemp + @"ResourceFiles\iconView.jpg"));
+            imageOrder.Source = new BitmapImage(new Uri(_dirTemp + @"ResourceFiles\iconOrder.jpg"));
+            imageView.Source = new BitmapImage(new Uri(_dirTemp + @"ResourceFiles\iconView.jpg"));
         }
 
         private void buttonOrder_Click(object sender, RoutedEventArgs e)

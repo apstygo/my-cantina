@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MyCantina
 {
@@ -20,13 +10,13 @@ namespace MyCantina
     /// </summary>
     public partial class ViewOrderLinesPage : Page
     {
-        private double totalCost = 0;
-        private int orderID;
+        private double _totalCost = 0;
+        private int _orderId;
         public ViewOrderLinesPage(Order order)
         {
             InitializeComponent();
 
-            orderID = order.OrderID;
+            _orderId = order.OrderID;
 
             if (order.Paid)
                 buttonPay.IsEnabled = false;
@@ -45,21 +35,22 @@ namespace MyCantina
                 listViewOrderLines.ItemsSource = dishes.ToList();
 
                 foreach (Dish n in dishes)
-                    totalCost += n.Cost;
+                    _totalCost += n.Cost;
             }
         }
 
         private void buttonPay_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Стоимость заказа составила " + totalCost + "₽. Оплатить?", "Оплата заказа",
+            if (MessageBox.Show("Стоимость заказа составила " + _totalCost + "₽. Оплатить?", "Оплата заказа",
                     MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 using (var ctx = new MyCantinaDbContext())
                 {
-                    ctx.Orders.Find(orderID).Paid = true;
+                    ctx.Orders.Find(_orderId).Paid = true;
                     ctx.SaveChanges();
                 }
                 MessageBox.Show("Заказ успешно оплачен.");
+                Logger.Log("Оплачен заказ номер '" + _orderId + "'");
                 buttonPay.IsEnabled = false;
             }
         }

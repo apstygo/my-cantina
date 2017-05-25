@@ -9,7 +9,8 @@
     <Grid>
         <Image x:Name="imageAvatar" HorizontalAlignment="Left" Height="50" Margin="10,10,0,0" VerticalAlignment="Top" Width="50"/>
         <Rectangle x:Name="rectangleAvatar" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="50" RadiusY="49.5" RadiusX="49.5"/>
-        
+
         <Frame x:Name="frameMain" HorizontalAlignment="Center" Margin="0,0,0,10" Height="290" VerticalAlignment="Bottom" Width="410" NavigationUIVisibility="Hidden"/>
+        <Button Name="buttonOpenLog" Content="Лог" HorizontalAlignment="Left" Margin="352,10,0,0" VerticalAlignment="Top" Width="68" Height="46" Click="buttonOpenLog_Click"/>
     </Grid>
 </Window>
